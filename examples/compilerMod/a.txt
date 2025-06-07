@@ -1,0 +1,2 @@
+g++ CMDT.cpp Tasil/Tasil.cpp -o CMDT
+./CMDT

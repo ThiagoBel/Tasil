@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tasil</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/dark.min.css">
+  <link rel="shortcut icon" href="T.ico" type="image/x-icon">
+</head>
+
+<body>
+  <header>
+    <div>
+      <img src="T.png" width="150vh" height="150vh" alt="" ondragstart="return false">
+    </div>
+    <div>
+      <a href="#sobre"><button>Sobre</button></a>
+      <a href="#doc"><button>Documentação</button></a>
+      <a href="#examples"><button>Exemplos</button></a>
+      <a href="#download"><button>Download</button></a>
+      <a href="#tutorial"><button>Tutorial</button></a>
+    </div>
+  </header>
+
+  <main id="pts" role="main" tabindex="0">
+    <section class="pt" id="sobre" tabindex="0" aria-labelledby="sobre-title">
+      <h2 id="sobre-title">Sobre</h2>
+      <p>Biblioteca gratuita e open source de C++ para ajudar você!</p>
+    </section>
+
+    <section class="pt" id="doc" tabindex="0" aria-labelledby="doc-title">
+      <h2 id="doc-title">Documentação</h2>
+      <div id="codes">
+        <article class="code-sample" aria-label="Exemplo 1">
+          <pre><code>#include &lt;iostream&gt;
+#include "Tasil/Tasil.h"
+
+int main()
+{
+    std::cout &lt;&lt; "Hello" &lt;&lt; std::endl;
+    wait(1); // Espera 1 segundo.
+    std::cout &lt;&lt; "World!" &lt;&lt; std::endl;
+}</code></pre>
+        </article>
+
+        <article class="code-sample" aria-label="Exemplo 2">
+          <pre><code>#include &lt;iostream&gt;
+#include "Tasil/Tasil.h"
+
+int main()
+{
+    autorun("std::cout &lt;&lt; \"Hello, World!\";"); // Output: Hello, World!
+}</code></pre>
+        </article>
+
+        <article class="code-sample" aria-label="Exemplo 3">
+          <pre><code>#include &lt;iostream&gt;
+#include "Tasil/Tasil.h"
+
+int main()
+{
+    std::cout &lt;&lt; getUsername() &lt;&lt; std::endl; // Output: <span id="NameUserNavi">[User.Name]</span>
+}</code></pre>
+        </article>
+        <article class="code-sample" aria-label="Exemplo 4">
+          <pre><code>#include &lt;iostream&gt;
+#include "Tasil/Tasil.h"
+
+int main()
+{
+  backpack_put("ID", "INFORMAÇÃO"); // Guarda a informação numa pasta (o ID serve para você abrir ela depois)
+}</code></pre>
+        </article>
+        <article class="code-sample" aria-label="Exemplo 5">
+          <pre><code>#include &lt;iostream&gt;
+#include "Tasil/Tasil.h"
+
+int main()
+{
+  std::cout &lt;&lt; backpack_open("ID"); // Irá mostrar a informação guardada de acordo com o ID
+}</code></pre>
+        </article>
+        <article class="code-sample" aria-label="Exemplo 6">
+          <pre><code>#include &lt;iostream&gt;
+#include "Tasil/Tasil.h"
+
+int main()
+{
+  backpack_remove("ID") // Irá remover a informação de acordo com o ID
+}</code></pre>
+        </article>
+
+        <article class="code-sample" aria-label="Exemplo 4">
+          <pre><code>#include &lt;iostream&gt;
+#include "Tasil/Tasil.h"
+
+int main()
+{
+    std::cout &lt;&lt; os() &lt;&lt; std::endl; // Output: <span id="OsUserNavi">[OS.Name]</span>
+}</code></pre>
+        </article>
+      </div>
+    </section>
+    <section class="pt" id="examples" tabindex="0" aria-labelledby="ex-title">
+      <h2 id="doc-title">Exemplos</h2>
+      <p>O que se pode criar com o Tasil?</p>
+      <br>
+      <div>
+        <h4>Terminal C++</h4>
+        <p>Com o Tasil, fica muito mais fácil criar terminais C++, basta usar: <b>autorun("std::cout &lt;&lt;\"Hello, World!\";");</b></p>
+        <br>
+        <h4>Terminal PowerShell</h4>
+        <p>Com o Tasil, fica muito mais fácil criar terminais PowerShell, basta usar: <b>ps("echo Hello, World!");</b></p>
+        <br>
+        <h4>Leitor de arquivo</h4>
+        <p>Com o Tasil, fica muito mais fácil ler arquivos, basta usar: <b>readfile("filename");</b></p>
+      </div>
+    </section>
+    <section class="pt" id="download" tabindex="0" aria-labelledby="ex-title">
+      <h2 id="doc-title">Download</h2>
+      <div id="df">
+        <div>
+          <button onclick="BaixarTasil()" id="downloadbtn">Baixar</button>
+          <p>Versão: <b id="versionTasill">T?</b></p>
+        </div>
+        <div id="osRodaveis">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg" />
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/windows11/windows11-original.svg" />
+        </div>
+      </div>
+    </section>
+    <section class="pt" id="tutorial" tabindex="0" aria-labelledby="ex-title">
+      <h2 id="doc-title">Tutorial</h2>
+      <p>1. Depois que abaixar a pasta, descompacte ela, e ponha no mesmo diretório que o seu arquivo principal</p>
+      <img id="tutorialImg" src="prints/1.png" alt="">
+      <br>
+      <p>2. Ponha essa estrutura no main.cpp: </p>
+      <img id="tutorialImg" src="prints/2.png" alt="">
+      <br>
+      <p>3. Ponha qualquer coisa para testar: </p>
+      <img id="tutorialImg" src="prints/3.png" alt="">
+      <br>
+      <p>4. Abra o terminal, e ponha isso: </p>
+      <img id="tutorialImg" src="prints/4.png" alt="">
+      <br>
+      <p>5. Irá criar o arquivo chamado "main.exe": </p>
+      <img id="tutorialImg" src="prints/5.png" alt="">
+      <br>
+      <p>6. Execute o arquivo .exe: </p>
+      <img id="tutorialImg" src="prints/6.png" alt="">
+      <br>
+      <p>7. Agora seja feliz :)</p>
+      <img id="tutorialImg" src="prints/7.png" alt="">
+    </section>
+  </main>
+
+  <script>
+    function detectarSO() {
+      const plataforma = navigator.platform.toLowerCase();
+      if (plataforma.indexOf('win') !== -1) return 'Windows';
+      if (plataforma.indexOf('mac') !== -1) return 'macOS';
+      if (plataforma.indexOf('linux') !== -1) return 'Linux';
+      if (/iphone|ipad|ipod/.test(plataforma)) return 'iOS';
+      if (/android/.test(navigator.userAgent.toLowerCase())) return 'Android';
+      return '[OS.Name]';
+    }
+
+    const soUsuario = detectarSO();
+    document.getElementById("OsUserNavi").textContent = soUsuario;
+  </script>
+
+  <script>
+    const version = "T25";
+    const s = document.getElementById("versionTasill");
+    s.innerHTML = version;
+    function BaixarTasil() {
+      window.location.href = `vers/Tasil${version}.zip`;
+    }
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+
+</body>
+
+</html>
