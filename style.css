@@ -128,7 +128,7 @@ code:hover {
   width: 100%;
 }
 
-header button {
+header button, header input[type=text], header select {
   background-color: transparent;
   border: 2px solid var(--txcolor);
   border-radius: var(--border-radius);
@@ -147,6 +147,9 @@ header button {
   outline-offset: 4px;
 }
 
+header select {
+  color: black;
+}
 header button:hover,
 header button:focus {
   background-color: var(--txcolor);

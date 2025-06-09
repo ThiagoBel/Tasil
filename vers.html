@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tasil</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/dark.min.css">
+  <link rel="shortcut icon" href="T.ico" type="image/x-icon">
+  <style>
+    img {
+      width: 150px;
+      height: 150px;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div>
+      <img src="T.png" alt="Logo Tasil">
+    </div>
+    <div>
+      <a href="index.html"><button>Voltar para página inicial</button></a>
+      <input type="text" placeholder="Pesquise pela versão..." id="versBuscada">
+      <select id="osselect">
+        <option value="win">Windows</option>
+        <option value="lin">Linux</option>
+        <option value="wl">Windows & Linux</option>
+      </select>
+    </div>
+  </header>
+  <main>
+<section id="versoes" style="text-align: start;">
+  <div class="versao-item">
+    <a class="download-link" href="#" versao="T25" os="WL">
+      <span class="versT">Carregando...</span> - <span class="osT">Carregando...</span>
+    </a>
+    <br>
+  </div>
+  <div class="versao-item">
+    <a class="download-link" href="#" versao="T2501" os="WL">
+      <span class="versT">Carregando...</span> - <span class="osT">Carregando...</span>
+    </a>
+    <br>
+  </div>
+</section>
+
+  </main>
+
+<script>
+// Função para traduzir o código OS para texto
+function traduzirOS(os) {
+  if (os === "W") {
+    return "Windows";
+  } else if (os === "WL") {
+    return "Windows & Linux";
+  } else if (os === "L") {
+    return "Linux";
+  } else {
+    return "?";
+  }
+}
+
+const containerVersoes = document.getElementById('versoes');
+let itens = Array.from(containerVersoes.querySelectorAll('.versao-item'));
+
+itens.forEach(div => {
+  const link = div.querySelector('.download-link');
+  const versao = link.getAttribute('versao');
+  const os = link.getAttribute('os');
+
+  link.querySelector('.versT').textContent = versao;
+  link.querySelector('.osT').textContent = traduzirOS(os);
+  link.href = `vers/Tasil${versao}.zip`;
+});
+
+const inputPesquisa = document.getElementById('versBuscada');
+const selectOS = document.getElementById('osselect');
+
+// Função para filtrar versões com base em texto e OS selecionado
+function filtrarVersoes() {
+  const filtroTexto = inputPesquisa.value.toLowerCase();
+  const filtroOS = selectOS.value.toLowerCase();
+
+  const correspondentes = [];
+  const naoCorrespondentes = [];
+
+  itens.forEach(div => {
+    const link = div.querySelector('.download-link');
+    const versao = link.getAttribute('versao').toLowerCase();
+    const os = link.getAttribute('os').toLowerCase();
+
+    // Verifica se versão inclui o filtro texto
+    const bateTexto = versao.includes(filtroTexto);
+
+    // Verifica se o OS bate
+    // seletor "wl" significa Windows & Linux, então bate com "wl" ou filtro "wl"
+    let bateOS = false;
+
+    if (filtroOS === 'wl') {
+      // Se selecionou "wl", mostra tudo (Windows & Linux)
+      // Aqui pode ajustar se quiser mostrar apenas WL ou tudo
+      bateOS = true; // aceita todos, ou melhor aceitar só WL
+      // Se quiser aceitar só WL, faça: bateOS = (os === 'wl')
+    } else if (filtroOS === 'win') {
+      // 'win' = 'W' nos dados? No seu HTML você usa win, lin, wl, mas no atributo os você usa W, L, WL
+      // Então ajusta para bater com W e WL
+      bateOS = (os === 'w' || os === 'wl');
+    } else if (filtroOS === 'lin') {
+      bateOS = (os === 'l' || os === 'wl');
+    }
+
+    if (bateTexto && bateOS) {
+      correspondentes.push(div);
+      div.style.display = '';
+    } else {
+      naoCorrespondentes.push(div);
+      div.style.display = 'none';
+    }
+  });
+
+  containerVersoes.innerHTML = '';
+  correspondentes.forEach(div => containerVersoes.appendChild(div));
+  naoCorrespondentes.forEach(div => containerVersoes.appendChild(div));
+}
+
+// Escuta evento input do campo de texto
+inputPesquisa.addEventListener('input', filtrarVersoes);
+
+// Escuta evento change do select de OS
+selectOS.addEventListener('change', filtrarVersoes);
+
+</script>
+
+
+
+</body>
+
+</html>

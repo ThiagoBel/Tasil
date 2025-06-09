@@ -21,6 +21,8 @@
       <a href="#examples"><button>Exemplos</button></a>
       <a href="#download"><button>Download</button></a>
       <a href="#tutorial"><button>Tutorial</button></a>
+      <a href="vers.html"><button>Versões</button></a>
+
     </div>
   </header>
 
@@ -123,7 +125,7 @@ int main()
       <div id="df">
         <div>
           <button onclick="BaixarTasil()" id="downloadbtn">Baixar</button>
-          <p>Versão: <b id="versionTasill">T?</b></p>
+          <p>Ultima versão: <b id="versionTasill">T?</b></p>
         </div>
         <div id="osRodaveis">
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg" />
@@ -172,7 +174,7 @@ int main()
   </script>
 
   <script>
-    const version = "T25";
+    const version = "T2501";
     const s = document.getElementById("versionTasill");
     s.innerHTML = version;
     function BaixarTasil() {

@@ -1,0 +1,2 @@
+g++ main.cpp Tasil/Tasil.cpp -o main
+./main
