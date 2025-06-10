@@ -37,6 +37,8 @@ bool tf(const bool& valor);
 bool testTasil(const bool& soun);
 bool havefile(const std::string& filename);
 bool contains(const std::string& texto, const std::string& sub);
+bool is_windows();
+bool is_linux();
 
 template<typename T>
 void debug(const std::string& label, T valor);

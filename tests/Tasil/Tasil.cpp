@@ -36,6 +36,21 @@ string os() {
     return OSTASIL;
 }
 
+bool is_windows() {
+    #if _WIN32
+        return true;
+    #else
+        return false;
+    #endif
+}
+bool is_linux() {
+    #if defined(__linux__)
+        return true;
+    #else
+        return false;
+    #endif
+}
+
 string random(const int& min, const int& max) {
     static random_device rd;
     static mt19937 gen(rd());
