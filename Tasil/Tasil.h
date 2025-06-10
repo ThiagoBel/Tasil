@@ -39,6 +39,9 @@ bool havefile(const std::string& filename);
 bool contains(const std::string& texto, const std::string& sub);
 bool is_windows();
 bool is_linux();
+bool is_android();
+bool is_ios();
+bool is_macos();
 
 template<typename T>
 void debug(const std::string& label, T valor);

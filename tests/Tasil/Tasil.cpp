@@ -8,50 +8,97 @@
 
 using namespace std;
 
-string print(const string& texto) {
+string print(const string &texto)
+{
     cout << texto;
 }
 
-string printend(const string& textoend) {
+string printend(const string &textoend)
+{
     cout << textoend << endl;
 }
 
-string println(const string& textoln) {
+string println(const string &textoln)
+{
     cout << textoln << "\n";
 }
 
-string os() {
+string os()
+{
     string OSTASIL;
-    #ifdef _WIN32
-        OSTASIL = "Windows";
-    #elif defined(__linux__)
-        OSTASIL = "Linux";
-    #elif defined(__APPLE__)
-        OSTASIL = "IOS";
-    #elif defined(__unix__)
-        OSTASIL = "Unix";
-    #else
-        OSTASIL = "?";
-    #endif
+#ifdef _WIN32
+    OSTASIL = "Windows";
+#elif defined(__linux__)
+    OSTASIL = "Linux";
+#elif defined(__APPLE__)
+    OSTASIL = "IOS";
+#elif defined(__unix__)
+    OSTASIL = "Unix";
+#else
+    OSTASIL = "?";
+#endif
     return OSTASIL;
 }
 
-bool is_windows() {
-    #if _WIN32
-        return true;
-    #else
-        return false;
-    #endif
+bool is_windows()
+{
+#if _WIN32
+    return true;
+#else
+    return false;
+#endif
 }
-bool is_linux() {
-    #if defined(__linux__)
-        return true;
-    #else
-        return false;
-    #endif
+bool is_linux()
+{
+#if defined(__linux__)
+    return true;
+#else
+    return false;
+#endif
 }
 
-string random(const int& min, const int& max) {
+bool is_android()
+{
+#if defined(__ANDROID__)
+    return true;
+#else
+    return false;
+#endif
+}
+
+bool is_macos()
+{
+#if defined(__APPLE__) && defined(TARGET_OS_MAC) && TARGET_OS_MAC && !TARGET_OS_IPHONE
+    return true;
+#else
+    return false;
+#endif
+}
+
+#ifdef __APPLE__
+#include <TargetConditionals.h>
+#endif
+
+bool is_ios()
+{
+#if defined(__APPLE__) && defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE
+    return true;
+#else
+    return false;
+#endif
+}
+
+bool is_unix_like()
+{
+#if defined(__unix__) || defined(__unix) || defined(__APPLE__) || defined(__MACH__)
+    return true;
+#else
+    return false;
+#endif
+}
+
+string random(const int &min, const int &max)
+{
     static random_device rd;
     static mt19937 gen(rd());
     uniform_int_distribution<> dis(min, max);
@@ -59,20 +106,29 @@ string random(const int& min, const int& max) {
     return to_string(randomNumber);
 }
 
-string HelloWorld(const string& print) {
-    if (print == "Print" || print == "print") {
+string HelloWorld(const string &print)
+{
+    if (print == "Print" || print == "print")
+    {
         cout << "Hello, World!";
-    } else if (print == "Println" || print == "println") {
+    }
+    else if (print == "Println" || print == "println")
+    {
         cout << "Hello, World!\n";
-    } else {
+    }
+    else
+    {
         cout << "?" << endl;
     }
 }
 
-string ProcessTime() {
+string ProcessTime()
+{
     clock_t start = clock();
 
-    for (long i = 0; i < 100000000; ++i) {}
+    for (long i = 0; i < 100000000; ++i)
+    {
+    }
 
     clock_t end = clock();
 
@@ -81,42 +137,52 @@ string ProcessTime() {
     return to_string(elapsed_secs);
 }
 
-string nfile(const string& name) {
+string nfile(const string &name)
+{
     ofstream arquivoa(name);
 }
 
-string nfilec(const string& namee, const string& content) {
+string nfilec(const string &namee, const string &content)
+{
     ofstream arquivo(namee);
-    if (arquivo.is_open()) {
+    if (arquivo.is_open())
+    {
         arquivo << content << "\n";
     }
 }
 
-string cmd(const string& cmdd) {
+string cmd(const string &cmdd)
+{
     system(cmdd.c_str());
 }
 
-string ps(const string& cmddd) {
+string ps(const string &cmddd)
+{
     system(("powershell.exe -Command " + cmddd).c_str());
 }
 
-bool tf(const bool& valor) {
+bool tf(const bool &valor)
+{
     return valor;
 }
 
-bool testTasil(const bool& soun) {
-    if (soun == true) {
+bool testTasil(const bool &soun)
+{
+    if (soun == true)
+    {
         cout << "Teste do Tasil. ABCDEFGHIJKLMNOPQRSTUVWXYZ|abcdefghijklmnopqrstuvwxyz|0123456789|9876543210|7894561230|0321654987|-++-=--=/**/|\\,.<>;:^^~~``´´{{}}!@#$%¨&*()_" << endl;
     }
 }
 
-string autorun(const string& execcmd) {
+string autorun(const string &execcmd)
+{
     srand(time(nullptr));
     int numero = rand() % 2147483641 + 1;
     string nomeFile = "AUTORUNTASIL_KEY" + to_string(numero);
     ofstream tempfile(nomeFile + ".cpp");
 
-    if (tempfile.is_open()) {
+    if (tempfile.is_open())
+    {
         tempfile << "// Autorun\n";
         tempfile << "#include <iostream>\n\n";
         tempfile << "int main() {\n";
@@ -125,189 +191,234 @@ string autorun(const string& execcmd) {
         tempfile.close();
         system(("g++ " + nomeFile + ".cpp -o " + nomeFile).c_str());
 
-        #ifdef _WIN32
-            system((nomeFile + ".exe").c_str());
-            remove((nomeFile + ".exe").c_str());
-        #else
-            system(("./" + nomeFile).c_str());
-            remove(nomeFile.c_str());
-        #endif
+#ifdef _WIN32
+        system((nomeFile + ".exe").c_str());
+        remove((nomeFile + ".exe").c_str());
+#else
+        system(("./" + nomeFile).c_str());
+        remove(nomeFile.c_str());
+#endif
 
         remove((nomeFile + ".cpp").c_str());
-    } else {
+    }
+    else
+    {
         return "Erro.";
     }
 
     return "Executado e limpo.";
 }
 
-string autorunnb(const string& execccmd) {
+string autorunnb(const string &execccmd)
+{
     srand(time(nullptr));
     int numeroo = rand() % 2147483641 + 1;
     string nomeFileo = "AUTORUNTASIL_KEY" + to_string(numeroo);
     ofstream tempfileo(nomeFileo + ".cpp");
 
-    if (tempfileo.is_open()) {
+    if (tempfileo.is_open())
+    {
         tempfileo << execccmd;
         tempfileo.close();
         system(("g++ " + nomeFileo + ".cpp -o " + nomeFileo).c_str());
 
-        #ifdef _WIN32
-            system((nomeFileo + ".exe").c_str());
-            remove((nomeFileo + ".exe").c_str());
-        #else
-            system(("./" + nomeFileo).c_str());
-            remove(nomeFileo.c_str());
-        #endif
+#ifdef _WIN32
+        system((nomeFileo + ".exe").c_str());
+        remove((nomeFileo + ".exe").c_str());
+#else
+        system(("./" + nomeFileo).c_str());
+        remove(nomeFileo.c_str());
+#endif
 
         remove((nomeFileo + ".cpp").c_str());
-    } else {
+    }
+    else
+    {
         return "Erro.";
     }
 
     return "Executado e limpo.";
 }
 
-string versionCM(const string& chavezinha) {
+string versionCM(const string &chavezinha)
+{
     string base = chavezinha + " --version";
 
     system(base.c_str());
 }
 
-string helpCM(const string& chavezinhaa) {
+string helpCM(const string &chavezinhaa)
+{
     string basea = chavezinhaa + " --help";
 
     system(basea.c_str());
 }
 
-string readfile(const string& filename) {
+string readfile(const string &filename)
+{
     ifstream file(filename);
-    if (!file.is_open()) return "Erro ao abrir o arquivo.";
+    if (!file.is_open())
+        return "Erro ao abrir o arquivo.";
 
     string linha, conteudo;
-    while (getline(file, linha)) {
+    while (getline(file, linha))
+    {
         conteudo += linha + "\n";
     }
     file.close();
     return conteudo;
 }
 
-string del(const string& nome) {
+string del(const string &nome)
+{
     remove(nome.c_str());
 }
 
-string repeat(const string& texto, int vezes) {
+string repeat(const string &texto, int vezes)
+{
     string resultado;
-    for (int i = 0; i < vezes; ++i) {
+    for (int i = 0; i < vezes; ++i)
+    {
         resultado += texto;
     }
     return resultado;
 }
 
-string wait(double seconds) {
+string wait(double seconds)
+{
     clock_t end_time = clock() + static_cast<clock_t>(seconds * CLOCKS_PER_SEC);
-    while (clock() < end_time) {}
+    while (clock() < end_time)
+    {
+    }
     return " ";
 }
 
-string datetime() {
+string datetime()
+{
     time_t agora = time(0);
-    tm* tempo = localtime(&agora);
+    tm *tempo = localtime(&agora);
     char buffer[80];
     strftime(buffer, sizeof(buffer), "%d/%m/%Y %H:%M:%S", tempo);
     return string(buffer);
 }
 
-string upper(const string& texto) {
+string upper(const string &texto)
+{
     string r = texto;
-    for (char& c : r) c = toupper(c);
+    for (char &c : r)
+        c = toupper(c);
     return r;
 }
 
-string lower(const string& texto) {
+string lower(const string &texto)
+{
     string r = texto;
-    for (char& c : r) c = tolower(c);
+    for (char &c : r)
+        c = tolower(c);
     return r;
 }
 
-bool havefile(const string& filename) {
+bool havefile(const string &filename)
+{
     ifstream f(filename);
     return f.good();
 }
 
-template<typename T>
-void debug(const string& label, T valor) {
+template <typename T>
+void debug(const string &label, T valor)
+{
     cout << "[DEBUG] " << label << ": " << valor << endl;
 }
 
-string reverse(const string& texto) {
+string reverse(const string &texto)
+{
     return string(texto.rbegin(), texto.rend());
 }
 
-bool contains(const string& texto, const string& sub) {
+bool contains(const string &texto, const string &sub)
+{
     return texto.find(sub) != string::npos;
 }
-string cls() {
-    #ifdef _WIN32
-        system("cls");
-    #else
-        system("clear");
-    #endif
+string cls()
+{
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
 }
 
-string getUsername() {
-    #ifdef _WIN32
-        char* user = getenv("USERNAME");
-    #else
-        char* user = getenv("USER");
-    #endif
+string getUsername()
+{
+#ifdef _WIN32
+    char *user = getenv("USERNAME");
+#else
+    char *user = getenv("USER");
+#endif
     return user ? string(user) : "Desconhecido";
 }
 
-string tasilVersion() {
+string tasilVersion()
+{
     return "T25";
 }
 
-std::string backpack_put(const std::string& idt, const std::string& text) {
+std::string backpack_put(const std::string &idt, const std::string &text)
+{
     std::ofstream backpackfile("Tasil/Backpacks/" + idt + ".backpacktasil");
-    if (backpackfile.is_open()) {
+    if (backpackfile.is_open())
+    {
         backpackfile << text;
         backpackfile.close();
         return " ";
         // system(("move " + idt + ".backpacktasil Tasil/Backpacks").c_str());
-    } else {
+    }
+    else
+    {
         return "Erro na criação do arquivo backpack.";
     }
 }
 
-std::string backpack_open(const std::string& ido) {
+std::string backpack_open(const std::string &ido)
+{
     std::ifstream arquivoguardado("Tasil/Backpacks/" + ido + ".backpacktasil");
 
-    if (arquivoguardado.is_open()) {
+    if (arquivoguardado.is_open())
+    {
         std::string texto;
 
-        while (getline(arquivoguardado, texto)) {
+        while (getline(arquivoguardado, texto))
+        {
             return texto;
         }
         return " ";
-    } else {
+    }
+    else
+    {
         return "ID não encontrado.";
     }
 }
 
-std::string backpack_remove(const std::string& idr) {
+std::string backpack_remove(const std::string &idr)
+{
     std::string caminho = "Tasil/Backpacks/" + idr + ".backpacktasil";
     std::ifstream arquivo(caminho.c_str());
-    
-    if (arquivo.is_open()) {
+
+    if (arquivo.is_open())
+    {
         arquivo.close();
-        if (std::remove(caminho.c_str()) == 0) {
+        if (std::remove(caminho.c_str()) == 0)
+        {
             return "ID removido com sucesso.";
-        } else {
+        }
+        else
+        {
             return "Erro ao deletar o ID.";
         }
         return " ";
-    } else {
+    }
+    else
+    {
         return "ID não encontrado.";
     }
 }
